@@ -1,9 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { colors } from "./src/theme/colors";
 import { spacing } from "./src/theme/spacing";
 import { useFonts } from "expo-font";
 import { typography } from "./src/theme/typography";
+import CommonText from "./src/components/common/CommonText";
 
 export default function App() {
     const [loaded] = useFonts({
@@ -18,8 +19,7 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <Text style={{ fontSize: spacing[5], fontFamily: typography.bold }}>This is a text</Text>
-            <Text style={{ marginTop: spacing[4] }}>Hello World</Text>
+            <CommonText variant="h1">This is a text</CommonText>
             <StatusBar style="auto" />
         </View>
     );
@@ -28,7 +28,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.blue,
+        backgroundColor: colors.black,
         alignItems: "center",
         justifyContent: "center",
     },
