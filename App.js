@@ -1,10 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import { colors } from "./src/theme/colors";
-import { spacing } from "./src/theme/spacing";
 import { useFonts } from "expo-font";
-import { typography } from "./src/theme/typography";
-import CommonText from "./src/components/common/CommonText";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "./src/screens/HomeScreen";
+import { StatusBar } from "react-native-web";
+import DetailsScreen from "./src/screens/DetailsScreen";
 
 export default function App() {
     const [loaded] = useFonts({
@@ -13,23 +12,20 @@ export default function App() {
         "Spartan-Bold": require("./assets/fonts/SpartanBold.ttf"),
     });
 
+    const Stack = createNativeStackNavigator();
+
     if (!loaded) {
         return null;
     }
 
     return (
-        <View style={styles.container}>
-            <CommonText variant="h1">This is a text</CommonText>
-            <StatusBar style="auto" />
-        </View>
+        <>
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Details" component={DetailsScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colors.black,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
